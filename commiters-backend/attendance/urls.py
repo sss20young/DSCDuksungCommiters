@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
 
-urlpatterns = [
-    path('', views.home, name='home'), # 메인 페이지
+urlpatterns = [ 
+    path('', views.Attendance.as_view(), name='attendance'), # 메인 페이지
 ]

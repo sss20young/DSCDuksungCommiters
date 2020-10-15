@@ -1,0 +1,32 @@
+.navbar {
+    background-color: #b70050 !important;
+}
+
+.navbar-brand {
+    color: white !important;
+}
+
+.nav-link {
+    color: white !important;
+}
+
+.btn-outline-success {
+    border: 1px solid white! important;
+}
+
+.btn-outline-success:hover {
+    background-color: white !important;
+    color: #b70050 !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.login-logout-btn {
+    color: white !important;
+}
+
+.login-logout-btn:hover {
+    color: #b70050 !important;
+}

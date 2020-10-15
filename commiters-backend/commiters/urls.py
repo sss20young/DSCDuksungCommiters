@@ -5,4 +5,5 @@ import attendance.urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('attendance.urls')),
+    path('accounts/', include('allauth.urls')),
 ]

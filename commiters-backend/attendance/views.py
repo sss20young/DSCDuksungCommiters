@@ -8,5 +8,11 @@ class Attendance(generic.TemplateView):
     def get(self, request, *args, **kwargs):
         user = User.objects.all()
         repository = Repository.objects.all()
-        return render(request, 'home.html')
-        # return render(request, 'home.html', { 'user' : user, 'repository' : repository })
+        return render(request, 'home.html', { 'user' : user, 'repository' : repository })
+
+def about(request):
+    return render(request, 'about.html')
+
+def mypage(request):
+    user = User.objects.get(name = request.user.get_username())
+    return render(request, 'mypage.html', { 'user' : user })

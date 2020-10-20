@@ -23,6 +23,8 @@ class User(models.Model):
     profile = models.CharField(max_length=45, blank=True, null=True)
     userlogin = models.CharField(max_length=45)
 
+    def __str__(self):
+        return self.name
     class Meta:
         managed = False
         db_table = 'user'

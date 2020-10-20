@@ -156,3 +156,5 @@ dmypy.json
 
 # migrations
 migrations/
+
+*.png

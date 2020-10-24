@@ -3,8 +3,14 @@
 {% block content %}
 
 <div style="margin: 5% !important; text-align: center;">
-    {{ user.name }} 님 <br>
-    <img src="{{ user.profile }}" />
+    {{ mine.userlogin }} 님 <br>
+    이름 : {{ mine.name }} <br>
+    <img src="{{ mine.profile }}" /><br>
+
+
+    {% for repo in repos %}
+        {{ repo.name }} <br>
+    {% endfor %}
 </div>
 
 {% endblock %}

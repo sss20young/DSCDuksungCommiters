@@ -15,23 +15,25 @@
 
 <body>
 
-{% for list in user %}
+{% for list in users %}
 <div class="nickname" id="{{ list.user_id }}" pk="{{ list.userlogin }}">
     <p id="{{ list.userlogin }}"></p>
 </div>
 {% endfor %}
 
+{% if user.is_authenticated %}
 <div class="row" id="attend_form">
     <form action="/attend" method="post">
         <button type="submit" value="참여하기"  class="btn btn-outline-danger">DSC 덕성 커미터스 1회 참여하기</button>
     </form>
 </div>
+{% endif %}
 
 <div class="row">
     <div class="column main">
         <h2>DSC 덕성 커미터스 1회 참가자들</h2>
         <div class="users">
-            {% for list in user %}
+            {% for list in users %}
             <div class="user-profile">
                 <img src="{{ list.profile }}" alt="avartar url" /> <br>
                 <p>{{ list.userlogin }}</p>
@@ -55,7 +57,7 @@
         <table>
             <tr id="table-title">
                 <td>User</td>
-                {% for list in user %}
+                {% for list in users %}
                     <td>{{ list.userlogin }}</td>
                 {% endfor %}
             </tr>

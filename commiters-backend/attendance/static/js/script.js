@@ -7,7 +7,7 @@ var userid=[];
 var cc=[];
 var formatted_dates=[];
 var all_dates=[];
-const total_days=60;
+const total_days=14;
 
 const today= new Date();
 const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
@@ -23,7 +23,7 @@ var event = new Date(year,month,date);
 console.log(event);
 
 
-// 출석부 날짜 범위 2020.04.10 ~ 어제
+// 출석부 날짜 범위
 
 function resolveCalendar() {
     for (let date = new Date(start_day); date <= last_day; new Date(date.setDate(date.getDate() + 1))) {
@@ -77,11 +77,12 @@ new Promise(function (res, rej) {
             // 저장소 단위
             for(var t=0;t< (res.data).length ; t++) {
                 // 날짜 있었던 자리
-
+                // GET /repos/:owner/:repo/commits
+                // https://api.github.com/repos/sss20young/DSCDuksungCommiters/commits
                 axios.get('https://api.github.com/repos/'+((res.data)[t].owner).login+'/'+(res.data)[t].name+'/commits', {
                 params: { since: event.toISOString() },
                 headers: {
-                    'Authorization': 'token 4cbefe0b92b3f1d7e639c197ace645761ade1a24'
+                    'Authorization': 'token 74344d37dd9b748d29d96db7e6e71d4b673377ca'
                 }
                 }).then(res=>{
                     let commit_cnt = (res.data).length;
@@ -137,7 +138,7 @@ new Promise(function (res, rej) {
 
 // 진행률 그래프
 function draw_progress(progress) {
-    let html= `<h5 class="text-center">총 ${all_dates.length}일 중 ${formatted_dates.length}일 진행</h5><br>`;
+    let html = `<h5 class="text-center">총 ${all_dates.length}일 중 ${formatted_dates.length}일 진행</h5><br>`;
 
     let progress_rate = progress;
 
@@ -161,9 +162,9 @@ function draw_progress(progress) {
 
             var value = Math.round(circle.value() * 100);
             if (value === 0) {
-            circle.setText('');
+                circle.setText('');
             } else {
-            circle.setText(value+"%");
+                circle.setText(value+"%");
             }
 
         }
@@ -176,7 +177,7 @@ function draw_progress(progress) {
 
     $("#progress").html(html);
 
-    }
+}
 
 //오늘의 출석률 그래프
 function draw_attend_noshow(total_user, today_count) {
@@ -197,14 +198,11 @@ function draw_attend_noshow(total_user, today_count) {
         from: {color: '#b70050'},
         to: {color: '#b70050'},
         step: (state, bar) => {
-        bar.path.setAttribute('stroke', state.color);
-    }
-});
+            bar.path.setAttribute('stroke', state.color);
+        }
+    });
 
+    bar.animate(total_attendance_rate/100);  // Number from 0.0 to 1.0
 
-
-bar.animate(total_attendance_rate/100);  // Number from 0.0 to 1.0
-
-$("#attend_noshow_div").html(attend_noshow_html);
-
+    $("#attend_noshow_div").html(attend_noshow_html);
 }

@@ -100,7 +100,7 @@ class Commit(models.Model):
     commit_id = models.AutoField(primary_key=True)
     repository_repository = models.ForeignKey('Repository', models.DO_NOTHING, blank=True, null=True)
     user_user = models.ForeignKey('User', models.DO_NOTHING, blank=True, null=True)
-    createdat = models.DateTimeField(db_column='createdAt', blank=True, null=True)  # Field name made lowercase.
+    createdat = models.DateTimeField(db_column='createdAt', blank=True, null=True, auto_now_add=True)  # Field name made lowercase.
 
     class Meta:
         managed = False

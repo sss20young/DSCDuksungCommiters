@@ -11,7 +11,6 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.9.0/dist/progressbar.js"></script>
-<script src="{% static 'js/script.js' %}"></script>
 
 <body>
 
@@ -28,6 +27,13 @@
     </form>
 </div>
 {% endif %}
+
+{% for commit_user, commit_count in dict.items %}
+<div class="committer" id="{{ commit_user }}" pk="{{ commit_count }}">
+    {{ commit_user }}
+    {{ commit_count }}
+</div>
+{% endfor %}
 
 <div class="row">
     <div class="column main">
@@ -56,15 +62,33 @@
         <h2>오늘의 출석부</h2>
         <table>
             <tr id="table-title">
-                <td>User</td>
-                {% for list in users %}
-                    <td>{{ list.userlogin }}</td>
-                {% endfor %}
+                <td>User & Date</td>
+                <td>11/2</td>
+                <td>11/3</td>
+                <td>11/4</td>
+                <td>11/5</td>
+                <td>11/6</td>
+                <td>11/7</td>
+                <td>11/8</td>
+                <td>11/9</td>
+                <td>11/10</td>
+                <td>11/11</td>
+                <td>11/12</td>
+                <td>11/13</td>
+                <td>11/14</td>
+                <td>11/15</td>
             </tr>
+            {% for list in users %}
+            <tr id="{{list.userlogin}}">
+                <td>{{ list.userlogin }}</td>
+            </tr>
+            {% endfor %}
             <tr id="attendees"></tr>
         </table>
     </div>
 </div>
 </body>
+
+<script src="{% static 'js/script.js' %}"></script>
 
 {% endblock %}

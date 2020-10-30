@@ -14,12 +14,6 @@
 
 <body>
 
-{% for list in users %}
-<div class="nickname" id="{{ list.user_id }}" pk="{{ list.userlogin }}">
-    <p id="{{ list.userlogin }}"></p>
-</div>
-{% endfor %}
-
 {% if user.is_authenticated %}
 <div class="row" id="attend_form">
     <form action="/attend" method="post">
@@ -28,10 +22,16 @@
 </div>
 {% endif %}
 
-{% for commit_user, commit_count in dict.items %}
-<div class="committer" id="{{ commit_user }}" pk="{{ commit_count }}">
-    {{ commit_user }}
-    {{ commit_count }}
+{% for list in users %}
+<div class="nickname" id="{{ list.user_id }}" pk="{{ list.userlogin }}">
+    <p id="{{ list.userlogin }}"></p>
+</div>
+{% endfor %}
+
+{% for commit_user, commit_count in today_attendance.items %}
+<div class="today_attendance">
+    <p class="today_attendance_{{ commit_user }}"></p>
+    <p class="today_attendance_{{ commit_count }}"></p>
 </div>
 {% endfor %}
 
@@ -78,9 +78,12 @@
                 <td>11/14</td>
                 <td>11/15</td>
             </tr>
-            {% for list in users %}
-            <tr id="{{list.userlogin}}">
-                <td>{{ list.userlogin }}</td>
+            {% for user, commit_count in until_now_attendance.items %}
+            <tr id="{{ user.userlogin }}">
+                <td>{{ user.userlogin }}</td>
+                {% for count in commit_count %}
+                <td class="commit_count_{{ count }}">{{ count }}</td>
+                {% endfor %}
             </tr>
             {% endfor %}
             <tr id="attendees"></tr>

@@ -4,8 +4,7 @@ let committer = [];
 
 const today = new Date();
 const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
-let start_day = new Date(2020, 9, 25); // 설정 month - 1 // 2020년 10월 25일 00:00 시작
-// const start_day = new Date(2020, 10, 2); // 설정 month - 1 // 2020년 11월 2일 00:00 시작
+let start_day = new Date(2020, 10, 2); // 설정 month - 1 // 2020년 11월 2일 00:00 시작
 let last_day = new Date(2020, 10, 16); // 설정 month - 1 // 2020년 11월 16일 00:00 종료
 let all_dates = [];
 let formatted_dates = [];
@@ -72,7 +71,6 @@ function draw_progress() {
     $("#progress").html(html);
 }
 
-
 // 오늘의 출석률 그래프
 function draw_attend_noshow(total_user, today_count) {
     let html = `<h5 class="text-center">총 ${all_dates.length}일 중 ${formatted_dates.length}일 진행</h5>`;
@@ -99,32 +97,41 @@ function draw_attend_noshow(total_user, today_count) {
     bar.animate(total_attendance_rate/100);  // Number from 0.0 to 1.0
 
     $("#attend_noshow_div").html(attend_noshow_html);
+
 }
 
 google.charts.setOnLoadCallback(draw_progress());
-google.charts.setOnLoadCallback(draw_attend_noshow(3,1)); // TODO: total_user, today_count 값 가져오기
+google.charts.setOnLoadCallback(draw_attend_noshow($('.today_attendance').length, $('.today_attendance').length - $('.today_attendance_0').length));
 
 
 
 
 
 
-
-
-
-
-
-
-// var username=[];
-// var userid=[];
-// var cc=[];
-
-// // sy
 // let commit_user = []; // 커밋한 유저
 // let commit_count = []; // 커밋 수
 // let commit = [];
 
+// // 오늘 출석했다면 border color 채우기
+// function fill_color() { 
+//     const committer = document.getElementsByClassName("committer");
+//     console.log(committer);
+//     console.log(committer.length);
+//     for (var i = 0; i < commit.length; i++) {
+        
+//         commit_user.push(commit[i].getAttribute('id'));
+//         commit_count.push(commit[i].getAttribute('pk'));
+//         console.log(commit_user);
 
+//         if (commit_count[i] > 0) {
+//             var user_profile = document.getElementsByClassName("user-profile");
+//             user_profile.css('border-color', '#black');
+//             console.log(commit_count[i]);
+//         }
+//     }
+// }
+
+// fill_color();
 
 
 // //사용자, 커밋 수 가져오기
@@ -218,24 +225,6 @@ google.charts.setOnLoadCallback(draw_attend_noshow(3,1)); // TODO: total_user, t
 //     });
 // });
 
-// function fill_color() { //오늘 출석했다면 배경칠하기
-//     committer.push(document.getElementsByClassName("committer"));
-//     console.log(committer);
-//     console.log(committer.length);
-//     for (var i = 0; i < commit.length; i++) {
-        
-//         commit_user.push(commit[i].getAttribute('id'));
-//         commit_count.push(commit[i].getAttribute('pk'));
-//         console.log(commit_user);
 
-//         if (commit_count[i] > 0) {
-//             var user_profile = document.getElementsByClassName("user-profile");
-//             user_profile.css('border-color', '#black');
-//             console.log(commit_count[i]);
-//         }
-//     }
-// }
-
-// fill_color();
 
 

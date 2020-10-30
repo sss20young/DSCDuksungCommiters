@@ -68,43 +68,58 @@ def get_commit_count_job():
         if Commit.objects.filter(user_user = User.objects.get(userlogin = user.userlogin), createdat__gte = today, createdat__lt = tomorrow): # 오늘 날짜가 있다면 수정
             commit_pre = Commit.objects.filter(user_user = User.objects.get(userlogin = user.userlogin), createdat__gte = today, createdat__lt = tomorrow)
             commit_pre.delete()
-            Commit.objects.create(user_user = User.objects.get(userlogin = user.userlogin), commit_count = count)
+            Commit.objects.create(user_user = User.objects.get(userlogin = user.userlogin), commit_count = count, createdat = today)
         else: # 그렇지 않다면 생성
-            Commit.objects.create(user_user = User.objects.get(userlogin = user.userlogin), commit_count = count)
+            Commit.objects.create(user_user = User.objects.get(userlogin = user.userlogin), commit_count = count, createdat = today)
 
 
-# BackgroundScheduler 를 사용하면 start를 먼저 하고 add_job 을 이용해 수행할 것을 등록해줍니다.
+# BackgroundScheduler 를 사용하면 start를 먼저 하고 add_job 을 이용해 수행할 것을 등록해준다.
 scheduler = BackgroundScheduler()
 scheduler.start()
-
-
-# interval - 1시간 마다 실행
-scheduler.add_job(get_commit_count_job, 'interval', minutes=1, id="get_commit_count_job")
+scheduler.add_job(get_commit_count_job, 'interval', hours=1, id="get_commit_count_job") # interval - 1시간 마다 실행
 
 
 
 
 class Attendance(generic.TemplateView):
     def get(self, request, *args, **kwargs):
+        start_day = datetime(2020, 10, 29) # 시작일 : 11월 2일
         today = datetime(datetime.today().year, datetime.today().month, datetime.today().day) # 오늘
-        yesterday = today - timedelta(2) # 어제(오늘-1)
+        yesterday = today - timedelta(1) # 어제(오늘-1)
         tomorrow = today + timedelta(1) # 내일(오늘+1)
 
-        dict = {}
+        until_now_attendance = {} # 지금까지 출석 현황
+        today_attendance = {} # 오늘 출석 현황
         users = User.objects.all()
         for user in users:
-            if Commit.objects.filter(user_user = User.objects.get(userlogin = user), createdat__gte = today, createdat__lt = tomorrow): 
-                commits = Commit.objects.get(user_user = User.objects.get(userlogin = user.userlogin), createdat__gte = today, createdat__lt = tomorrow)
-                dict[user] = commits.commit_count
+            list = [] # 리스트 초기화
+            while True:
+                if start_day <= today:
+                    if Commit.objects.filter(user_user = User.objects.get(userlogin = user.userlogin), createdat__gte = start_day, createdat__lt = start_day + timedelta(1)):
+                        commits = Commit.objects.get(user_user = User.objects.get(userlogin = user.userlogin), createdat__gte = start_day, createdat__lt = start_day + timedelta(1))
+                        list.append(commits.commit_count)
 
-        return render(request, 'home.html', { 'users' : users, 'dict' : dict })
+                        if (start_day == today):
+                            today_attendance[user] = commits.commit_count
+                    else:
+                        list.append(0)
+
+                    
+                    start_day = start_day + timedelta(1)
+                else:
+                    break
+
+            until_now_attendance[user] = list
+            
+
+        return render(request, 'home.html', { 'users' : users, 'until_now_attendance' : until_now_attendance, 'today_attendance' : today_attendance })
     
     def post(self, request, *args, **kwargs):
 
         # 내 정보 추출 - Github API
         mine_github = requests.get(
             'https://api.github.com/users/' + request.user.get_username(),
-            #headers = { 'Authorization' : 'aecdcbe00d40a4e6f9023a4d3e255ba87039371d' }
+            headers = { 'Authorization' : 'aecdcbe00d40a4e6f9023a4d3e255ba87039371d' }
         )
         mine_github = mine_github.json() # json 형식에서 데이터 추출
         
@@ -121,7 +136,7 @@ class Attendance(generic.TemplateView):
         # 내 Repository 정보 추출 - Github API
         repos = requests.get(
             'https://api.github.com/users/' + request.user.get_username() + '/repos',
-            #headers = { 'Authorization' : 'aecdcbe00d40a4e6f9023a4d3e255ba87039371d' }
+            headers = { 'Authorization' : 'aecdcbe00d40a4e6f9023a4d3e255ba87039371d' }
         )
         repos = repos.json()
 

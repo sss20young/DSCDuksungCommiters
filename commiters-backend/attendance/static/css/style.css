@@ -90,18 +90,18 @@ h2 {
     clear: both;
 }
 
-.users{
+.users {
     display: inline-block;
 }
 
-.users p{
+.users p {
     text-align: center;
     margin-top: 0.3rem;
     margin-bottom: 0.3rem;
     font-size: 0.8rem;
 }
 
-.user-profile{
+.user-profile {
     float: left;
     width: 40%;
     border: 3px solid #b70050;
@@ -113,7 +113,7 @@ h2 {
     padding: 5px;
 }
 
-.user-profile > img{
+.user-profile > img {
     max-width: 150px;
     width: 100%;
     height: auto;
@@ -131,7 +131,7 @@ h2 {
     width: 100%;
   }
 
-  .row{
+  .row {
     margin-left: 10px;
   }
 
@@ -179,4 +179,21 @@ tr, td {
 tr#table-title{
     background-color: #b70050;
     color: #ffffff;
+}
+
+/* 오늘의 출석부 count가 0이면 white, 1이면 #f5dae6, 2이면 #c94f85, 3이면 #db146b, 4이면 #b70050 */
+td.commit_count_0 {
+    background-color: white;
+}
+td.commit_count_1 {
+    background-color: #f5dae6;
+}
+td.commit_count_2 {
+    background-color: #c94f85;
+}
+td.commit_count_3 {
+    background-color: #c23c77;
+}
+td.commit_count_4 {
+    background-color: #b70050;
 }

@@ -197,3 +197,11 @@ td.commit_count_3 {
 td.commit_count_4 {
     background-color: #b70050;
 }
+
+footer {
+    background-color: #b70050 !important;
+}
+
+.text-uppercase {
+    color: white;
+}

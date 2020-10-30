@@ -182,20 +182,26 @@ tr#table-title{
 }
 
 /* 오늘의 출석부 count가 0이면 white, 1이면 #f5dae6, 2이면 #c94f85, 3이면 #db146b, 4이면 #b70050 */
-td.commit_count_0 {
+td.commit_count_0, .less_more_0 {
     background-color: white;
 }
-td.commit_count_1 {
+td.commit_count_1, .less_more_1 {
     background-color: #f5dae6;
 }
-td.commit_count_2 {
+td.commit_count_2, .less_more_2 {
     background-color: #c94f85;
 }
-td.commit_count_3 {
+td.commit_count_3, .less_more_3 {
     background-color: #c23c77;
 }
-td.commit_count_4 {
+td.commit_count_4, .less_more_4 {
     background-color: #b70050;
+}
+
+.less_more {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    margin-right: 0.1rem;
 }
 
 footer {

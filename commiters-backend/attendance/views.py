@@ -55,22 +55,46 @@ def get_commit_count_job():
             # Commit에 데이터 생성 (하루 동안)
             for commit in commits:
                 commit_date = commit['commit']['committer']['date']
-                commit_date = commit_date[0:10]
-                commit_date = datetime.strptime(commit_date, '%Y-%m-%d') # str to datetime
-                # TODO: 시간 재설정 필요
+
+                # TODO: detail한 부분 수정 필요
+                # commit_date type 변환
+                # 15시가 넘으면 날짜+1
+                if (int(commit_date[11:13]) >= 15):
+                    # 1,3,5,7,8,10,12월말인 경우
+                    if (int(commit_date[8:10]) == 31):
+                        if (int(commit_date[5:7]) == 1 or int(commit_date[5:7]) == 3 or int(commit_date[5:7]) == 5 or int(commit_date[5:7]) == 7 or int(commit_date[5:7]) == 8 or int(commit_date[5:7]) == 10 or int(commit_date[5:7]) == 12):
+                            commit_date_month = int(commit_date[5:7])+1
+                            commit_date_day = 1
+                    elif (int(commit_date[8:10]) == 30):
+                        # 2,4,5,9,11월말인 경우
+                        if(int(commit_date[5:7]) == 2 or int(commit_date[5:7]) == 4 or int(commit_date[5:7]) == 6 or int(commit_date[5:7]) == 9 or int(commit_date[5:7]) == 11): # 월말인 경우
+                            commit_date_month = int(commit_date[5:7])+1
+                            commit_date_day = 1
+                    else:
+                        commit_date_month = int(commit_date[5:7])
+                        commit_date_day = int(commit_date[8:10])+1
+                    
+                else: # 그렇지 않으면 그대로
+                    commit_date_month = int(commit_date[5:7])
+                    commit_date_day = int(commit_date[8:10])
+
+                commit_date_year = int(commit_date[0:4])
+
+                commit_date = datetime(commit_date_year, commit_date_month, commit_date_day)
+
 
                 # committer filtering
-                if ( commit['commit']['committer']['name'] == user.userlogin or commit['commit']['committer']['name'] == mine_database.name ):
-                    if commit_date >= today and commit_date < tomorrow:
+                if ( commit['commit']['committer']['name'] == user.userlogin or commit['commit']['committer']['name'] == mine_database.name or commit['commit']['committer']['name'] == "GitHub"):
+                    if (commit_date == today):
                         count = count + 1
 
 
         if Commit.objects.filter(user_user = User.objects.get(userlogin = user.userlogin), createdat__gte = today, createdat__lt = tomorrow): # 오늘 날짜가 있다면 수정
             commit_pre = Commit.objects.filter(user_user = User.objects.get(userlogin = user.userlogin), createdat__gte = today, createdat__lt = tomorrow)
             commit_pre.delete()
-            Commit.objects.create(user_user = User.objects.get(userlogin = user.userlogin), commit_count = count, createdat = today)
+            Commit.objects.create(user_user = User.objects.get(userlogin = user.userlogin), commit_count = count)
         else: # 그렇지 않다면 생성
-            Commit.objects.create(user_user = User.objects.get(userlogin = user.userlogin), commit_count = count, createdat = today)
+            Commit.objects.create(user_user = User.objects.get(userlogin = user.userlogin), commit_count = count)
 
 
 # BackgroundScheduler 를 사용하면 start를 먼저 하고 add_job 을 이용해 수행할 것을 등록해준다.
@@ -83,7 +107,7 @@ scheduler.add_job(get_commit_count_job, 'interval', hours=1, id="get_commit_coun
 
 class Attendance(generic.TemplateView):
     def get(self, request, *args, **kwargs):
-        start_day = datetime(2020, 10, 29) # 시작일 : 11월 2일
+        start_day = datetime(2020, 11, 2) # 시작일 : 11월 2일
         today = datetime(datetime.today().year, datetime.today().month, datetime.today().day) # 오늘
         yesterday = today - timedelta(1) # 어제(오늘-1)
         tomorrow = today + timedelta(1) # 내일(오늘+1)

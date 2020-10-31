@@ -51,7 +51,7 @@ a {
     border: 2px solid #b70050! important;
 }
 
-h2 {
+.column > h2 {
   padding-bottom: 5px;
   background-color: rgba(0,0,0,.03);
 }

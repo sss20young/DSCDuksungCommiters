@@ -5,6 +5,7 @@ from django.http import JsonResponse
 import json, requests
 from django.core.serializers import json
 from datetime import datetime, timedelta
+from django.conf import settings
 
 # Schedule - BackgroundScheduler(다수 수행)
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -32,7 +33,7 @@ def get_commit_count_job():
         # 내 Repository 정보 추출 - Github API
         repos = requests.get(
             'https://api.github.com/users/' + user.userlogin + '/repos',
-            headers = { 'Authorization' : 'aecdcbe00d40a4e6f9023a4d3e255ba87039371d' }
+            headers = { 'Authorization' : settings.GITHUB_OAUTH_TOKEN }
         )
         repos = repos.json()
 
@@ -47,7 +48,7 @@ def get_commit_count_job():
             # 내 Commit 정보 추출 - Github API
             commits = requests.get(
                 'https://api.github.com/repos/' + user.userlogin + '/' + repo['name'] + '/commits',
-                headers = { 'Authorization' : 'aecdcbe00d40a4e6f9023a4d3e255ba87039371d' }
+                headers = { 'Authorization' : settings.GITHUB_OAUTH_TOKEN }
             )
             commits = commits.json()
             
@@ -143,7 +144,7 @@ class Attendance(generic.TemplateView):
         # 내 정보 추출 - Github API
         mine_github = requests.get(
             'https://api.github.com/users/' + request.user.get_username(),
-            headers = { 'Authorization' : 'aecdcbe00d40a4e6f9023a4d3e255ba87039371d' }
+            headers = { 'Authorization' : settings.GITHUB_OAUTH_TOKEN }
         )
         mine_github = mine_github.json() # json 형식에서 데이터 추출
         
@@ -160,7 +161,7 @@ class Attendance(generic.TemplateView):
         # 내 Repository 정보 추출 - Github API
         repos = requests.get(
             'https://api.github.com/users/' + request.user.get_username() + '/repos',
-            headers = { 'Authorization' : 'aecdcbe00d40a4e6f9023a4d3e255ba87039371d' }
+            headers = { 'Authorization' : settings.GITHUB_OAUTH_TOKEN }
         )
         repos = repos.json()
 

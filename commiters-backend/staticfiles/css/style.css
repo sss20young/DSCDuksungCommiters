@@ -1,0 +1,213 @@
+* {
+    box-sizing: border-box;
+}
+
+.navbar {
+    background-color: #b70050 !important;
+}
+
+.navbar-brand {
+    color: white !important;
+}
+
+.nav-link {
+    color: white !important;
+}
+
+.btn-outline-success {
+    border: 1px solid white! important;
+}
+
+.btn-outline-success:hover {
+    color: #b70050 !important;
+    background-color: white !important;
+    border-color: white !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.login-logout-btn {
+    color: white !important;
+}
+
+.login-logout-btn:hover {
+    color: #b70050 !important;
+}
+
+#attend_form {
+    margin: 5rem !important;
+}
+
+.btn-outline-danger {
+    color: #b70050 !important;
+    border: 2px solid #b70050! important;
+}
+
+.btn-outline-danger:hover {
+    color: white !important;
+    background-color: #b70050 !important;
+    border: 2px solid #b70050! important;
+}
+
+.column > h2 {
+  padding-bottom: 5px;
+  background-color: rgba(0,0,0,.03);
+}
+
+.row {
+    margin: 5rem !important;
+    text-align: center !important;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+    float: left;
+    margin: 1rem !important;
+    padding: 0px !important;
+    border: 2px solid rgba(0,0,0,.1);
+    border-radius: 5px;
+}
+
+.main {
+    width: 55%;
+}
+
+.side {
+  width: 35%;
+}
+
+.chart {
+    overflow-x: auto;
+    width: 100%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.users {
+    display: inline-block;
+}
+
+.users p {
+    text-align: center;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+    font-size: 0.8rem;
+}
+
+.user-profile {
+    float: left;
+    width: 40%;
+    border: 3px solid #b70050;
+    border-radius: 3px;
+    margin: 5px;
+    overflow: hidden;
+    word-wrap: break-word;
+    text-align: center;
+    padding: 5px;
+}
+
+.user-profile > img {
+    max-width: 150px;
+    width: 100%;
+    height: auto;
+}
+
+#container {
+    margin-bottom: 20px;
+    padding: 10px;
+    height: 8px;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column.side, .column.main {
+    width: 100%;
+  }
+
+  .row {
+    margin-left: 10px;
+  }
+
+  #user-profile {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .user-profile {
+    width: 48%;
+  }
+
+  .chart{
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 294px) {
+  .user-profile {
+    width: 98%;
+  }
+
+  .chart{
+    width: 98%;
+  }
+}
+
+/* table */
+table {
+    width: 100%;
+    padding: 5px !important;
+}
+
+table, tr, td {
+    text-align: center;
+    border-collapse: collapse;
+}
+
+tr, td {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    padding: 5px;
+}
+
+tr#table-title{
+    background-color: #b70050;
+    color: #ffffff;
+}
+
+/* 오늘의 출석부 count가 0이면 white, 1이면 #f5dae6, 2이면 #c94f85, 3이면 #db146b, 4이면 #b70050 */
+td.commit_count_0, .less_more_0 {
+    background-color: white;
+}
+td.commit_count_1, .less_more_1 {
+    background-color: #f5dae6;
+}
+td.commit_count_2, .less_more_2 {
+    background-color: #c94f85;
+}
+td.commit_count_3, .less_more_3 {
+    background-color: #c23c77;
+}
+td.commit_count_4, .less_more_4 {
+    background-color: #b70050;
+}
+
+.less_more {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    margin-right: 0.1rem;
+}
+
+footer {
+    background-color: #b70050 !important;
+}
+
+.text-uppercase {
+    color: white;
+}

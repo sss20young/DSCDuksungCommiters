@@ -157,4 +157,5 @@ dmypy.json
 # migrations
 migrations/
 
-*.png
+# secrets.json
+secrets/

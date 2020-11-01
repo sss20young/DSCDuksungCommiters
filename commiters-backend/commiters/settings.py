@@ -12,21 +12,27 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import json
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+ROOT_DIR = os.path.dirname(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1)_jms2+kwiyh7_!p5_)dbnvet+mfyh6u@kdb*$5)04b=@f=s$'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+SECRET_DIR = os.path.join(BASE_DIR, 'secrets')
+secrets = json.load(open(os.path.join(SECRET_DIR, 'secret.json'), 'rb'))
+
+SECRET_KEY = secrets['SECRET_KEY']
+DEBUG = False
+ALLOWED_HOSTS = secrets['ALLOWED_HOSTS']
+
+GITHUB_OAUTH_TOKEN = secrets['GITHUB_OAUTH_TOKEN']
+
 
 
 # Application definition
@@ -87,10 +93,10 @@ WSGI_APPLICATION = 'commiters.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydb',
-        'USER': 'root',
-        'PASSWORD': 'dscduksung',
-        'HOST': 'committers.cyvj1na8f5mi.ap-northeast-2.rds.amazonaws.com',
+        'NAME': secrets['DB_NAME'],
+        'USER': secrets['DB_USER'],
+        'PASSWORD': secrets['DB_PASSWORD'],
+        'HOST': secrets['DB_HOST'],
         'PORT': '3306',
         'OPTIONS': {
             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"'
@@ -150,8 +156,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'attendance', 'static') # /attendance/static
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 USE_TZ = True
 TIME_ZONE = 'Asia/Seoul'

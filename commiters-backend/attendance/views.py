@@ -117,8 +117,9 @@ class Attendance(generic.TemplateView):
         today_attendance = {} # 오늘 출석 현황
         users = User.objects.all()
         for user in users:
+            start_day = datetime(2020, 11, 2)
             list = [] # 리스트 초기화
-            while True:
+            while start_day <= today:
                 if start_day <= today:
                     if Commit.objects.filter(user_user = User.objects.get(userlogin = user.userlogin), createdat__gte = start_day, createdat__lt = start_day + timedelta(1)):
                         commits = Commit.objects.get(user_user = User.objects.get(userlogin = user.userlogin), createdat__gte = start_day, createdat__lt = start_day + timedelta(1))

@@ -40,11 +40,12 @@
         <h2>DSC 덕성 커미터스 1회 참가자들</h2>
         <div class="users">
             {% for list in users %}
-            <div class="user-profile">
-                <img src="{{ list.profile }}" alt="avartar url" /> <br>
-                <p>{{ list.userlogin }}</p>
-            </div>
+                <div class="user-profile">
+                    <img src="{{ list.profile }}" alt="avartar url" /> <br>
+                    <p>{{ list.userlogin }}</p>
+                </div>
             {% endfor %}
+            </table>
         </div>
     </div>
 
@@ -60,7 +61,7 @@
 <div class="row">
     <div class="column chart">
         <h2>오늘의 출석부</h2>
-        <table>
+        <table class="today_attendance_table">
             <tr id="table-title">
                 <td>User & Date</td>
                 <td>11/2</td>
@@ -78,11 +79,15 @@
                 <td>11/14</td>
                 <td>11/15</td>
             </tr>
-            {% for user, commit_count in until_now_attendance.items %}
-            <tr id="{{ user.userlogin }}">
-                <td>{{ user.userlogin }}</td>
+            {% for commit_user, commit_count in until_now_attendance.items %}
+            <tr id="{{ commit_user.userlogin }}">
+                <td>{{ commit_user.userlogin }}</td>
                 {% for count in commit_count %}
-                <td class="commit_count_{{ count }}">{{ count }}</td>
+                    {% if count >= 4 %}
+                    <td class="commit_count_4">{{ count }}</td>
+                    {% else %}
+                    <td class="commit_count_{{ count }}">{{ count }}</td>
+                    {% endif %}
                 {% endfor %}
             </tr>
             {% endfor %}

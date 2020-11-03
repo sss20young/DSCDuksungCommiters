@@ -103,7 +103,7 @@ a {
 
 .user-profile {
     float: left;
-    width: 40%;
+    width: 10rem;
     border: 3px solid #b70050;
     border-radius: 3px;
     margin: 5px;
@@ -161,17 +161,17 @@ a {
 }
 
 /* table */
-table {
+.today_attendance_table {
     width: 100%;
     padding: 5px !important;
 }
 
-table, tr, td {
+.today_attendance_table, .today_attendance_table tr, .today_attendance_table td {
     text-align: center;
     border-collapse: collapse;
 }
 
-tr, td {
+.today_attendance_table tr, .today_attendance_table td {
     border-bottom: 1px solid rgba(0,0,0,.1);
     padding: 5px;
 }

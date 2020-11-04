@@ -86,7 +86,7 @@ def get_commit_count_job():
 
 
                     # committer filtering
-                    if ( commit['commit']['committer']['name'] == user.userlogin or commit['commit']['committer']['name'] == mine_database.name or commit['commit']['committer']['name'] == "GitHub"):
+                    if ( commit['committer']['login'] == user.userlogin or commit['committer']['login'] == "web-flow" or commit['commit']['committer']['name'] == "GitHub" ):
                         if (commit_date == today):
                             count = count + 1
                 

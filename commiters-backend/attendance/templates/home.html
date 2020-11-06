@@ -83,11 +83,11 @@
             <tr id="{{ commit_user.userlogin }}">
                 <td>{{ commit_user.userlogin }}</td>
                 {% for count in commit_count %}
-                    {% if count >= 4 %}
-                    <td class="commit_count_4">{{ count }}</td>
-                    {% else %}
-                    <td class="commit_count_{{ count }}">{{ count }}</td>
-                    {% endif %}
+		    {% if count >= 4 %}
+		    <td class="commit_count_4">{{ count }}</td>
+		    {% else %}
+		    <td class="commit_count_{{ count }}">{{ count }}</td>
+		    {% endif %}
                 {% endfor %}
             </tr>
             {% endfor %}

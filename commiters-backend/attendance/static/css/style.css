@@ -126,23 +126,49 @@ a {
 }
 
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 1024px) {
+  .row {
+    margin: 4rem !important;
+  }
+    
+  .user-profile {
+    width: 22%;
+  }
+    
+  .chart{
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .column.side, .column.main {
+    width: 100%;
+  }
+  
+  .row {
+    margin: 3rem !important;
+  }
+  
+  .user-profile {
+    width: 30%;
+  }
+  
+  .chart{
+    width: 90%;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .column.side, .column.main {
     width: 100%;
   }
 
   .row {
-    margin-left: 10px;
+    margin: 2rem !important;
   }
 
-  #user-profile {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 600px) {
   .user-profile {
-    width: 48%;
+    width: 45%;
   }
 
   .chart{
@@ -151,11 +177,15 @@ a {
 }
 
 @media screen and (max-width: 294px) {
+  .row {
+    margin: 1rem !important;
+  }
+
   .user-profile {
     width: 98%;
   }
 
-  .chart{
+  .chart {
     width: 98%;
   }
 }

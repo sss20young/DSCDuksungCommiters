@@ -14,14 +14,6 @@
 
 <body>
 
-{% if user.is_authenticated %}
-<div class="row" id="attend_form">
-    <form action="/attend" method="post">
-        <button type="submit" value="참여하기"  class="btn btn-outline-danger">DSC 덕성 커미터스 1회 참여하기</button>
-    </form>
-</div>
-{% endif %}
-
 {% for list in users %}
 <div class="nickname" id="{{ list.user_id }}" pk="{{ list.userlogin }}">
     <p id="{{ list.userlogin }}"></p>
@@ -42,7 +34,7 @@
             {% for list in users %}
                 <div class="user-profile">
                     <img src="{{ list.profile }}" alt="avartar url" /> <br>
-                    <p>{{ list.userlogin }}</p>
+                    <p><a href="https://github.com/{{ list.userlogin }}" style="color: black;">{{ list.userlogin }}</a></p>
                 </div>
             {% endfor %}
             </table>
@@ -81,7 +73,7 @@
             </tr>
             {% for commit_user, commit_count in until_now_attendance.items %}
             <tr id="{{ commit_user.userlogin }}">
-                <td>{{ commit_user.userlogin }}</td>
+                <td><a href="https://github.com/{{ commit_user.userlogin }}" style="color: black;">{{ commit_user.userlogin }}</a></td>
                 {% for count in commit_count %}
 		    {% if count >= 4 %}
 		    <td class="commit_count_4">{{ count }}</td>
@@ -104,6 +96,15 @@
         </div>
     </div>
 </div>
+
+{% if user.is_authenticated %}
+<div class="row" id="attend_form">
+    <form action="/attend" method="post">
+        <button type="submit" value="참여하기"  class="btn btn-outline-danger">DSC 덕성 커미터스 1회 참여하기</button>
+    </form>
+</div>
+{% endif %}
+
 </body>
 
 <script src="{% static 'js/script.js' %}"></script>

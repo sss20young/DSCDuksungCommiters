@@ -159,3 +159,7 @@ migrations/
 
 # secrets.json
 secrets/
+
+# deploy
+*.ppk
+*.pem

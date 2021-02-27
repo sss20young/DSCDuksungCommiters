@@ -4,8 +4,8 @@ let committer = [];
 
 const today = new Date();
 const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
-let start_day = new Date(2021, 1, 22); // 설정 month - 1 // 2020년 11월 2일 00:00 시작
-let last_day = new Date(2021, 2, 15); // 설정 month - 1 // 2020년 11월 16일 00:00 종료
+let start_day = new Date(2021, 2, 1); // 설정 month - 1 // 2021년 3월 1일 00:00 시작
+let last_day = new Date(2021, 2, 22); // 설정 month - 1 // 2021년 3월 22일 00:00 종료
 let all_dates = [];
 let formatted_dates = [];
 let progressed_day = 0;

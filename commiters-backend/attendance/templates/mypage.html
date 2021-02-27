@@ -1,31 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div style="margin: 5% !important; text-align: center;">
-    <table style="width: 50%; text-align: ceneter;">
-        <tr>
-            <td rowspan="2" text-align="center"><img src="{{ mine.profile }}" style="width: 10rem; height: 10rem;" /></td>
-            <td>{{ mine.userlogin }} 님</td>
-        </tr>
-        <tr>
-            <td>NAME : {{ mine.name }}</td>
-        </tr>
-    </table>
-    <table>
-        <tr>
-            <td>Repo NAME</td>
-        </tr>
-        {% for repo in repos %}
-        <tr>
-            <td>{{ repo.name }}</td> 
-        </tr>
-        {% endfor %}
-    </table>
-
-
-
-    
-</div>
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <div style="margin: 5% !important; text-align: center;">
+            <table style="width: 50%; text-align: ceneter;">
+                <tr>
+                    <td rowspan="2" text-align="center"><img src="{{ mine.profile }}" style="width: 10rem; height: 10rem;" /></td>
+                    <td>{{ mine.userlogin }} 님</td>
+                </tr>
+                <tr>
+                    <td>NAME : {{ mine.name }}</td>
+                </tr>
+            </table>
+            <table>
+                <!-- <tr>
+                    <td>Repo NAME</td>
+                </tr>
+                {% for repo in repos %}
+                <tr>
+                    <td>{{ repo.name }}</td> 
+                </tr>
+                {% endfor %} -->
+            </table>      
+        </div>
+    </body>
+</html>
 
 {% endblock %}

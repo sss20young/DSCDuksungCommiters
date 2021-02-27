@@ -112,7 +112,7 @@ scheduler.add_job(get_commit_count_job, 'interval', hours=1, id="get_commit_coun
 
 class Attendance(generic.TemplateView):
     def get(self, request, *args, **kwargs):
-        start_day = datetime(2020, 11, 2) # 시작일 : 11월 2일
+        start_day = datetime(2021, 3, 1) # 시작일 : 03월 01일
         today = datetime(datetime.today().year, datetime.today().month, datetime.today().day) # 오늘
         yesterday = today - timedelta(1) # 어제(오늘-1)
         tomorrow = today + timedelta(1) # 내일(오늘+1)
@@ -121,7 +121,7 @@ class Attendance(generic.TemplateView):
         today_attendance = {} # 오늘 출석 현황
         users = User.objects.all()
         for user in users:
-            start_day = datetime(2020, 11, 2) # 시작일 : 11월 2일
+            start_day = datetime(2021, 3, 1) # 시작일 : 11월 2일
             list = [] # 리스트 초기화
             while start_day <= today:
                 if start_day <= today:

@@ -28,8 +28,8 @@ SECRET_DIR = os.path.join(BASE_DIR, 'secrets')
 secrets = json.load(open(os.path.join(SECRET_DIR, 'secret.json'), 'rb'))
 
 SECRET_KEY = secrets['SECRET_KEY']
-DEBUG = False
-ALLOWED_HOSTS = secrets['ALLOWED_HOSTS']
+DEBUG = True
+ALLOWED_HOSTS = secrets['ALLOWED_HOSTS'] # ["3.35.134.78"]
 
 GITHUB_OAUTH_TOKEN = secrets['GITHUB_OAUTH_TOKEN']
 
@@ -131,7 +131,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-SITE_ID = 2
+SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/' # 로그인 되었을 때 연결해주는 URL
 

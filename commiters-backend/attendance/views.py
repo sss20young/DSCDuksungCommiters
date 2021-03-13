@@ -180,4 +180,18 @@ def about(request):
 def mypage(request):
     mine = User.objects.get(userlogin = request.user.get_username())
     repos = Repository.objects.filter(user_user = mine.user_id)
-    return render(request, 'mypage.html', { 'mine' : mine, 'repos' : repos })
+
+    start_day = datetime(2021, 3, 1) # 시작일 : 03월 01일
+    today = datetime(datetime.today().year, datetime.today().month, datetime.today().day) # 오늘
+    list = [] # 리스트 초기화
+    while start_day <= today:
+        if start_day <= today:
+            if Commit.objects.filter(user_user = User.objects.get(userlogin = mine.userlogin), createdat__gte = start_day, createdat__lt = start_day + timedelta(1)):
+                commits = Commit.objects.get(user_user = User.objects.get(userlogin = mine.userlogin), createdat__gte = start_day, createdat__lt = start_day + timedelta(1))
+                list.append(commits.commit_count)
+            else:
+                list.append(0)
+
+            start_day = start_day + timedelta(1)
+
+    return render(request, 'mypage.html', { 'mine' : mine, 'repos' : repos , 'list' : list })
